@@ -40,7 +40,7 @@ export default defineComponent({
         // 调用 fetchItems 函数获取数据，成功后赋值给 items
         items.value = await getItems();
 
-        
+
       } catch (error) {
         // 捕获到错误时，在控制台输出错误信息
         console.error('获取数据失败:', error);
