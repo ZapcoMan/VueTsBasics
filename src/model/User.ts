@@ -11,7 +11,10 @@ class User{
         this.username = username;
         this.password = password;
     }
-    eating(){
-        console.log(this.username + "eating");
+    toString(){
+        console.log("用户名:" + this.username + "密码:" + this.password);
     }
 }
+const user = new User("codervibe","123456");
+user.toString()
+export {}
