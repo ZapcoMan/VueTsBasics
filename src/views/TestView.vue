@@ -9,8 +9,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-import { getItems } from '@/api/Test.ts';
+import {defineComponent, onMounted, ref} from 'vue';
+import {getItems} from '@/api/Test.ts';
+import User from '@/model/User.ts'
 
 // 定义 item 的类型，包括 id 和 name 两个属性
 interface Item {
@@ -30,6 +31,8 @@ export default defineComponent({
       try {
         // 调用 fetchItems 函数获取数据，成功后赋值给 items
         items.value = await getItems();
+        const user = new User('admin', '123456');
+        user.toString()
       } catch (error) {
         // 捕获到错误时，在控制台输出错误信息
         console.error('获取数据失败:', error);

@@ -4,7 +4,7 @@
  * Description:
  * Others:
  */
-class User{
+export default class User{
     username:string;
     password:string;
     constructor(username:string,password:string) {
@@ -17,4 +17,3 @@ class User{
 }
 const user = new User("codervibe","123456");
 user.toString()
-export {}
