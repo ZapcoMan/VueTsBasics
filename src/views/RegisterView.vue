@@ -1,32 +1,19 @@
 <template>
-<div>
-  <h1>
-    {{title}}
-  </h1>
-
-</div>
-
-  <el-form
-      ref="ruleFormRef"
-      style="max-width: 600px"
-      :model="ruleForm"
-      status-icon
-      :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
-  >
+  <div>
+    <h1>
+      {{ title }}
+    </h1>
+  </div>
+  <el-form ref="ruleFormRef" style="max-width: 600px" :model="ruleForm" status-icon :rules="rules" label-width="auto"
+           class="demo-ruleForm">
+    <el-form-item label="Confirm" prop="checkPass">
+      <el-input v-model="ruleForm.username" type="text" autocomplete="off"/>
+    </el-form-item>
     <el-form-item label="Password" prop="pass">
-      <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+      <el-input v-model="ruleForm.pass" type="password" autocomplete="off"/>
     </el-form-item>
     <el-form-item label="Confirm" prop="checkPass">
-      <el-input
-          v-model="ruleForm.checkPass"
-          type="password"
-          autocomplete="off"
-      />
-    </el-form-item>
-    <el-form-item label="Age" prop="age">
-      <el-input v-model.number="ruleForm.age" />
+      <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off"/>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm(ruleFormRef)">
@@ -38,14 +25,20 @@
 </template>
 <script setup lang="ts">
 import {ref} from "vue";
-import { reactive } from 'vue'
+import {reactive} from 'vue'
 
 const title = ref('注册');
 
 
-import type { FormInstance, FormRules } from 'element-plus'
+import type {FormInstance, FormRules} from 'element-plus'
 
 const ruleFormRef = ref<FormInstance>()
+
+const ruleForm = reactive({
+  username: '',
+  pass: '',
+  checkPass: '',
+})
 
 const checkAge = (rule: any, value: any, callback: any) => {
   if (!value) {
@@ -85,16 +78,11 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
   }
 }
 
-const ruleForm = reactive({
-  pass: '',
-  checkPass: '',
-  age: '',
-})
 
 const rules = reactive<FormRules<typeof ruleForm>>({
-  pass: [{ validator: validatePass, trigger: 'blur' }],
-  checkPass: [{ validator: validatePass2, trigger: 'blur' }],
-  age: [{ validator: checkAge, trigger: 'blur' }],
+  pass: [{validator: validatePass, trigger: 'blur'}],
+  checkPass: [{validator: validatePass2, trigger: 'blur'}],
+  age: [{validator: checkAge, trigger: 'blur'}],
 })
 
 const submitForm = (formEl: FormInstance | undefined) => {
